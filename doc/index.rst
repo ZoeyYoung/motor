@@ -4,7 +4,7 @@ Motor: Asynchronous Python driver for Tornado and MongoDB
 .. image:: _static/motor.png
     :align: center
 
-About
+关于
 -----
 
 Motor presents a Tornado_ callback- or Future-based API for non-blocking access
@@ -18,7 +18,7 @@ the docs are on `ReadTheDocs <http://motor.readthedocs.org/>`_.
 
     --*Ben Darnell, Tornado maintainer*
 
-Install with::
+安装::
 
     $ pip install motor
 
@@ -32,7 +32,7 @@ For confirmed issues or feature requests, open a case in
 
 .. _PyMongo: http://pypi.python.org/pypi/pymongo/
 
-Contents
+目录
 --------
 
 .. toctree::

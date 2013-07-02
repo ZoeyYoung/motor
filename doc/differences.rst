@@ -1,8 +1,8 @@
 =====================================
-Differences between Motor and PyMongo
+Motor 和 PyMongo 的区别
 =====================================
 
-Major differences
+主要的区别
 =================
 
 Creating a connection
