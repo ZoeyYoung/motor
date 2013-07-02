@@ -32,28 +32,25 @@ Motor 指南
   import pymongo
   pymongo.MongoClient().test_database.test_collection.remove()
 
-A guide to using **MongoDB** and **Tornado** with **Motor**, the
+A guide to using *MongoDB* and *Tornado* with *Motor*, the
 non-blocking driver.
 
 Tutorial Prerequisites
-----------------------
+--------------------
 在你学习Motor之前, 你可以通过 `MongoDB 指南`_ 学习MongoDB.
 
 安装 pip_ 然后执行:
 
   $ pip install motor
 
-Once done, the following should run in the Python shell without raising an
-exception:
+安装后, 在Python shell中执行如下命令将不会导致异常:
 
 .. doctest::
 
   >>> import motor
 
-This tutorial also assumes that a MongoDB instance is running on the
-default host and port. Assuming you have `downloaded and installed
-<http://docs.mongodb.org/manual/installation/>`_ MongoDB, you
-can start it like so:
+这个指南假设在默认的host(主机)和port(端口)上已经运行着一个MongoDB实例. 假设你已经`下载并安装
+<http://docs.mongodb.org/manual/installation/>`_ MongoDB, 你可以这样运行它:
 
 .. code-block:: bash
 

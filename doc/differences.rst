@@ -5,24 +5,20 @@ Motor 和 PyMongo 的区别
 主要的区别
 =================
 
-Creating a connection
+创建一个连接(connection)
 ---------------------
 
-PyMongo's :class:`~pymongo.mongo_client.MongoClient` and
-:class:`~pymongo.mongo_replica_set_client.MongoReplicaSetClient` constructors
-block until they have established a connection to MongoDB. A
-:class:`~motor.MotorClient` or :class:`~motor.MotorReplicaSetClient`,
-however, is created unconnected. One should call
-:meth:`~motor.MotorClient.open_sync` at the beginning of a Tornado web
-application, before accepting requests:
+PyMongo的 :class:`~pymongo.mongo_client.MongoClient` 和
+:class:`~pymongo.mongo_replica_set_client.MongoReplicaSetClient` 构造函数阻塞(block)直到它们创建了与MongoDB的连接. 然而
+:class:`~motor.MotorClient` 或 :class:`~motor.MotorReplicaSetClient` 是独立创建的. 在接受请求(requests)之前, 必须在Tornado web应用程序的开头调用
+:meth:`~motor.MotorClient.open_sync` :
 
 .. code-block:: python
 
     import motor
     client = motor.MotorClient().open_sync()
 
-To make a connection asynchronously once the application is running, call
-:meth:`~motor.MotorClient.open`:
+一旦应用程序运行后马上使连接异步, 要调用 :meth:`~motor.MotorClient.open`:
 
 .. code-block:: python
 
@@ -35,22 +31,18 @@ To make a connection asynchronously once the application is running, call
 
     motor.MotorClient().open(opened)
 
-Callbacks and Futures
+Callbacks 和 Futures
 ---------------------
 
-Motor supports nearly every method PyMongo does, but Motor methods that
-do network I/O take an optional callback function. The callback must accept two
-parameters:
+Motor支持几乎所有PyMongo方法, 但需要网络I/O的Motor方法有一个可行的回调(callback)函数. 这个回调函数必须接收两个参数:
 
 .. code-block:: python
 
     def callback(result, error):
         pass
 
-Motor's asynchronous methods return immediately, and execute the
-callback, with either a result or an error, when the operation has completed.
-For example, :meth:`~pymongo.collection.Collection.find_one` is used in PyMongo
-like:
+当操作结束时, Motor的异步方法马上返回一个结果(result)或者错误(error), 并执行回调函数.
+例如, :meth:`~pymongo.collection.Collection.find_one` 在PyMongo中是这样使用的:
 
 .. code-block:: python
 
@@ -58,7 +50,7 @@ like:
     user = db.users.find_one({'name': 'Jesse'})
     print user
 
-But Motor's :meth:`~motor.MotorCollection.find_one` method is asynchronous:
+但Motor的 :meth:`~motor.MotorCollection.find_one` 方法是异步的:
 
 .. code-block:: python
 
@@ -72,9 +64,9 @@ But Motor's :meth:`~motor.MotorCollection.find_one` method is asynchronous:
 
     db.users.find_one({'name': 'Jesse'}, callback=got_user)
 
-The callback must be passed as a keyword argument, not a positional argument.
+callback必须以关键字参数形式传递, 而非位置参数.
 
-To find multiple documents, Motor provides :meth:`~motor.MotorCursor.to_list`:
+查找多个文档, Motor提供 :meth:`~motor.MotorCursor.to_list`:
 
 .. code-block:: python
 
