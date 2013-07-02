@@ -1,6 +1,6 @@
 .. _motor-tutorial:
 
-Motor Tutorial
+Motor 指南
 ==============
 
 .. These setups are redundant because I can't figure out how to make doctest
@@ -37,9 +37,9 @@ non-blocking driver.
 
 Tutorial Prerequisites
 ----------------------
-You can learn about MongoDB with the `MongoDB Tutorial`_ before you learn Motor.
+在你学习Motor之前, 你可以通过 `MongoDB 指南`_ 学习MongoDB.
 
-Install pip_ and then do:
+安装 pip_ 然后执行:
 
   $ pip install motor
 
