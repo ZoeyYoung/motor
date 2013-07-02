@@ -58,47 +58,37 @@ Tutorial Prerequisites
 
 .. _pip: http://www.pip-installer.org/en/latest/installing.html
 
-.. _MongoDB Tutorial: http://docs.mongodb.org/manual/tutorial/getting-started/
+.. _MongoDB 指南: http://docs.mongodb.org/manual/tutorial/getting-started/
 
-Object Hierarchy
+对象层次
 ----------------
-Motor, like PyMongo, represents data with a 4-level object hierarchy:
+Motor, 就像PyMongo, 以4级的对象层次来表现数据:
 
 * :class:`~motor.MotorClient` / :class:`~motor.MotorReplicaSetClient`:
-  represents a mongod process, or a cluster of them. You explicitly create one
-  of these client objects, connect it to a running mongod or mongods, and
-  use it for the lifetime of your application.
-* :class:`~motor.MotorDatabase`: Each mongod has a set of databases (distinct
-  sets of data files on disk). You can get a reference to a database from a
-  client.
-* :class:`~motor.MotorCollection`: A database has a set of collections, which
-  contain documents; you get a reference to a collection from a database.
-* :class:`~motor.MotorCursor`: Executing :meth:`~motor.MotorCollection.find` on
-  a :class:`~motor.MotorCollection` gets a :class:`~motor.MotorCursor`, which
-  represents the set of documents matching a query.
+  代表一个mongod进程, 或者它们的一个集群. 你明确的创建一个客户端对象, 然后将它连接到一个运行着的mongod或mongods, 然后在你应用程序的生命周期中使用它.
+* :class:`~motor.MotorDatabase`: 每个mongod有一组数据库(与磁盘上的一组数据文件不同). 你可以通过客户端(client)获得一个数据库的引用.
+* :class:`~motor.MotorCollection`: 每个数据库中有一组集合(collections), 集合中包含文档(documents); 你可以通过数据库获得集合的一个引用.
+* :class:`~motor.MotorCursor`: 在 :class:`~motor.MotorCollection` 上执行 :meth:`~motor.MotorCollection.find` 获得一个 :class:`~motor.MotorCursor` 对象, 代表了符合查询条件(query)的一组文档(documents).
 
-Creating a Client
+创建一个客户端(Client)
 -----------------
-You typically create a single instance of either :class:`~motor.MotorClient`
-or :class:`~motor.MotorReplicaSetClient` at the time your application starts
-up. (See `high availability and PyMongo`_ for an introduction to
+在你应用程序启动时, 你创建 :class:`~motor.MotorClient`
+或 :class:`~motor.MotorReplicaSetClient` 的一个实例. (查看 `high availability and PyMongo`_ for an introduction to
 MongoDB replica sets and how PyMongo connects to them.)
 
-You must call :meth:`~motor.MotorClient.open_sync` on this client object
-before any other operations on it:
+在执行任何操作之前, 你必须在客户端对象上调用 :meth:`~motor.MotorClient.open_sync` :
 
 .. doctest:: before-inserting-2000-docs
 
   >>> client = motor.MotorClient().open_sync()
 
-This connects to a ``mongod`` listening on the default host and port. You can
-specify the host and port like:
+这个操作连接至 ``mongod`` 并监听默认的host(主机)和port(端口). 你能像下面这样指定host(主机)和port(端口):
 
 .. doctest:: before-inserting-2000-docs
 
   >>> client = motor.MotorClient('localhost', 27017).open_sync()
 
-Motor also supports `connection URIs`_::
+Motor 同样支持 `connection URIs`_::
 
   >>> client = motor.MotorClient('mongodb://localhost:27017').open_sync()
 
@@ -106,29 +96,23 @@ Motor also supports `connection URIs`_::
 
 .. _connection URIs: http://docs.mongodb.org/manual/reference/connection-string/
 
-Getting a Database
+获得一个数据库
 ------------------
-A single instance of MongoDB can support multiple independent
-`databases <http://docs.mongodb.org/manual/reference/glossary/#term-database>`_.
-From an open client, you can get a reference to a particular database with
-dot-notation or bracket-notation:
+一个单独的MongoDB实例能支持多个独立的`databases <http://docs.mongodb.org/manual/reference/glossary/#term-database>`_.
+从一个打开的客户端, 你能获得一个指定数据库的引用, 使用点号表达式或者中括号表达式:
 
 .. doctest:: before-inserting-2000-docs
 
   >>> db = client.test_database
   >>> db = client['test_database']
 
-Creating a reference to a database does no I/O and does not accept a callback
-or return a Future.
+创建一个对数据库的引用并没有I/O操作也不接收回调函数(callback)或返回一个Future.
 
-Tornado Application Startup Sequence
+Tornado 应用程序启动序列
 ------------------------------------
-Now that we can create a client and get a database, we're ready to start
-a Tornado application that uses Motor.
+现在我们可以创建一个客户端并获得一个数据库, 我们已经准备好了开发一个使用Motor的Tornado应用程序.
 
-:meth:`~motor.MotorClient.open_sync` is a blocking operation so it should
-be called before listening for HTTP requests. Here's an example startup
-sequence for a Tornado web application::
+:meth:`~motor.MotorClient.open_sync` 是一个阻塞操作, 所以它必须在监听HTTP请求之前被调用. 这里是一个Tornado web应用程序启动序列的示例::
 
     db = motor.MotorClient().open_sync().test_database
 
