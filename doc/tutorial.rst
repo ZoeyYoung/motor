@@ -157,7 +157,7 @@ multiple subprocesses, you must create the client object **after** calling
 
 .. _start() method: http://tornadoweb.org/en/stable/netutil.html#tornado.netutil.TCPServer.start
 
-Getting a Collection
+获得一个集合
 --------------------
 A `collection <http://docs.mongodb.org/manual/reference/glossary/#term-collection>`_
 is a group of documents stored in MongoDB, and can be thought of as roughly
@@ -172,11 +172,9 @@ collection in Motor works the same as getting a database:
 Just like getting a reference to a database, getting a reference to a
 collection does no I/O and doesn't accept a callback or return a Future.
 
-Inserting a Document
+插入一个文档
 --------------------
-As in PyMongo, Motor represents MongoDB documents with Python dictionaries. To
-store a document in MongoDB, call :meth:`~motor.MotorCollection.insert` with a
-document and a callback:
+和PyMongo一样, Motor使用Python的字典来代表MongoDB的文档. 要在MongoDB中存储一个文档, 调用 :meth:`~motor.MotorCollection.insert` , 参数为一个文档和一个回调函数:
 
 .. doctest:: before-inserting-2000-docs
 

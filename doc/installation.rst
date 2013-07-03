@@ -1,15 +1,16 @@
-Installation
+安装
 ============
 
-Installation
+安装
 ------------
 
-Install Motor from PyPI_ with pip_::
+
+使用 pip_ 从 PyPI_ 安装Motor::
 
   $ pip install motor
 
-Pip automatically installs Motor's prerequisite packages, PyMongo_, Greenlet_,
-and Tornado_.
+Pip 自动安装 Motor 需要的包, PyMongo_, Greenlet_,
+和 Tornado_.
 
 Prerequisites
 -------------
